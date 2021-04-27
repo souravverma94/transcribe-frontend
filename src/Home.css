@@ -1,0 +1,23 @@
+#auto-text {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+}
+
+#txt-notes {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 97%;
+}
+
+#upload-btn {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+#tscrpt-save button {
+  margin-right: 10px;
+}
