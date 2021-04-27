@@ -21,3 +21,7 @@
 #tscrpt-save button {
   margin-right: 10px;
 }
+
+.seekbtngrp button {
+  text-transform: none;
+}

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import ReactPlayer from "react-player/lazy";
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import SavedNotes from "./SavedNotes";
 import AutomatedText from "./AutomatedText";
 import SelectButton from "./SelectButton";
@@ -17,6 +20,7 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isStart, setIsStart] = useState(false);
   const [dname, setDname] = useState("");
+  const playerRef = useRef();
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -47,12 +51,18 @@ const Home = () => {
     setDname("");
   };
 
+  const handleSeek = (Ref, val) => {
+    const currTime = Ref.current.getCurrentTime();
+    Ref.current.seekTo(currTime + val, "seconds");
+  };
+
   return (
     <div>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <div style={{ backgroundColor: "black" }}>
             <ReactPlayer
+              ref={playerRef}
               url={`videos/${filename}`}
               controls={true}
               playing={isPlaying}
@@ -66,6 +76,37 @@ const Home = () => {
             />
             &nbsp;
             {isLoading ? <CircularProgress /> : null}
+            <ButtonGroup
+              className="seekbtngrp"
+              variant="contained"
+              color="primary"
+              aria-label="contained primary button group"
+            >
+              <Button
+                startIcon={<ArrowBackIosIcon />}
+                onClick={() => handleSeek(playerRef, -0.2)}
+              >
+                20ms
+              </Button>
+              <Button
+                startIcon={<ArrowBackIosIcon />}
+                onClick={() => handleSeek(playerRef, -0.1)}
+              >
+                10ms
+              </Button>
+              <Button
+                endIcon={<ArrowForwardIosIcon />}
+                onClick={() => handleSeek(playerRef, 0.1)}
+              >
+                10ms
+              </Button>
+              <Button
+                endIcon={<ArrowForwardIosIcon />}
+                onClick={() => handleSeek(playerRef, 0.2)}
+              >
+                20ms
+              </Button>
+            </ButtonGroup>
           </div>
           &nbsp;
           <div>

@@ -28,7 +28,6 @@ const SavedNotes = ({ filename }) => {
     //console.log(filename);
     ref.on("value", (querySnapshot) => {
       const items = querySnapshot.val();
-      console.log(items);
       if (items) {
         setTranscripts(items[filename]);
         setIsLoading(false);
@@ -37,13 +36,11 @@ const SavedNotes = ({ filename }) => {
   };
 
   const handleLoadClick = (event) => {
-    if (event.target.value)
-      setCurrentVal(transcripts[event.target.value].value);
+    setCurrentVal(transcripts[event.currentTarget.value].value);
   };
 
   const handleDelClick = (event) => {
-    console.log(event.target.value);
-    removeTranscript(filename, event.target.value, "transcript");
+    removeTranscript(filename, event.currentTarget.value, "transcript");
   };
 
   const handleSaveText = (event) => {
@@ -56,16 +53,21 @@ const SavedNotes = ({ filename }) => {
         <List>
           {Object.entries(transcripts).map((ver) => {
             return (
-              <ListItem key={ver[0]} value={ver[0]} button={true}>
+              <ListItem key={ver[0]} button={true}>
                 <ListItemAvatar>
                   <Avatar style={{ color: "#fff", backgroundColor: blue[800] }}>
                     <SpeakerNotesIcon />
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={ver[0]} />
-                <ListItemIcon onClick={handleLoadClick}>
-                  <IconButton edge={false} aria-label="add" value={ver[0]}>
-                    <ExpandLessIcon value={ver[0]} color="primary" />
+                <ListItemIcon>
+                  <IconButton
+                    edge={false}
+                    aria-label="add"
+                    onClick={handleLoadClick}
+                    value={ver[0]}
+                  >
+                    <ExpandLessIcon color="primary" />
                   </IconButton>
                 </ListItemIcon>
                 <ListItemSecondaryAction>

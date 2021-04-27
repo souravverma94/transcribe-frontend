@@ -82,22 +82,13 @@ const AutomatedText = ({ isStart, filename, setIsLoading, setNotes }) => {
         Copy to Notes
       </Button>
       &nbsp;
-      <div id="tscrpt-save">
-        {/* <Button
-          variant="contained"
-          color="primary"
-          onClick={() => handleSave(filename, dname, transcript)}
-        >
-          Save
-        </Button> */}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => handleSaveAs(transcript, filename)}
-        >
-          Save As
-        </Button>
-      </div>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleSaveAs(transcript, filename)}
+      >
+        Save As
+      </Button>
     </form>
   );
 };
