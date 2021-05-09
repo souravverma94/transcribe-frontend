@@ -9,10 +9,13 @@ export const downloadAsTxtFile = (data, fname) => {
   element.click();
 };
 
-export const addTranscript = (pfname = "b2b.mp4", cfname, content, type) => {
-  pfname = `${pfname.split(".")[0]}_${type}`;
+export const addTranscript = (pfname = "b2b.mp4", content, user) => {
+  pfname = `${pfname.split(".")[0]}_transcript`;
   var postTranscrptRef = firebase.database().ref("transcripts");
   const newPostRef = postTranscrptRef.child(pfname);
+  const dttm = new Date().toISOString().replaceAll(".", "");
+  const cfname = `${user.email.split("@")[0]}_${dttm}`;
+  console.log(cfname);
   newPostRef.child(cfname).set({
     value: content,
   });

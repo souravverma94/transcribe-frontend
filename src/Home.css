@@ -25,3 +25,9 @@
 .seekbtngrp button {
   text-transform: none;
 }
+
+#elapsedtime {
+  font-family: monospace;
+  font-size: large;
+  margin: auto;
+}

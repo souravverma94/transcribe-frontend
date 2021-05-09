@@ -1,15 +1,9 @@
 import React from "react";
-import NavBar from "./NavBar";
-import Home from "./Home";
+import UserAuth from "./UserAuth";
 import "./App.css";
 
-function App() {
-  return (
-    <div>
-      <NavBar />
-      <Home />
-    </div>
-  );
-}
+const App = () => {
+  return <UserAuth />;
+};
 
 export default App;

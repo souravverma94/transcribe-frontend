@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Grid from "@material-ui/core/Grid";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
@@ -13,13 +13,14 @@ import SelectButton from "./SelectButton";
 import { downloadAsTxtFile, addTranscript } from "./util";
 import "./Home.css";
 
-const Home = () => {
+const Home = ({ user }) => {
   const [value, setValue] = useState("");
   const [isPlaying, setIsPlaying] = useState(false);
   const [filename, setFilename] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isStart, setIsStart] = useState(false);
-  const [dname, setDname] = useState("");
+  // const [dname, setDname] = useState("");
+  const [currentTime, setCurrentTime] = useState(0);
   const playerRef = useRef();
 
   const handleChange = (event) => {
@@ -42,18 +43,22 @@ const Home = () => {
     setIsStart((prevState) => !prevState);
   };
 
-  const handleDname = (event) => {
-    setDname(event.target.value);
-  };
+  // const handleDname = (event) => {
+  //   setDname(event.target.value);
+  // };
 
-  const handleSave = (fname, dname, notes) => {
-    addTranscript(fname, dname, notes, "transcript");
-    setDname("");
+  const handleSave = (fname, notes, user) => {
+    addTranscript(fname, notes, user);
+    // setDname("");
   };
 
   const handleSeek = (Ref, val) => {
     const currTime = Ref.current.getCurrentTime();
     Ref.current.seekTo(currTime + val, "seconds");
+  };
+
+  const handleOnProgress = (current) => {
+    setCurrentTime(current.playedSeconds);
   };
 
   return (
@@ -67,6 +72,9 @@ const Home = () => {
               controls={true}
               playing={isPlaying}
               onPause={handlePause}
+              onProgress={(e) => {
+                handleOnProgress(e);
+              }}
             />
           </div>
           <div id="upload-btn">
@@ -82,6 +90,12 @@ const Home = () => {
               color="primary"
               aria-label="contained primary button group"
             >
+              <Button
+                startIcon={<ArrowBackIosIcon />}
+                onClick={() => handleSeek(playerRef, -0.3)}
+              >
+                30ms
+              </Button>
               <Button
                 startIcon={<ArrowBackIosIcon />}
                 onClick={() => handleSeek(playerRef, -0.2)}
@@ -106,7 +120,14 @@ const Home = () => {
               >
                 20ms
               </Button>
+              <Button
+                endIcon={<ArrowForwardIosIcon />}
+                onClick={() => handleSeek(playerRef, 0.3)}
+              >
+                30ms
+              </Button>
             </ButtonGroup>
+            <p id="elapsedtime">Elapsed: {currentTime.toFixed(2)} seconds</p>
           </div>
           &nbsp;
           <div>
@@ -139,28 +160,21 @@ const Home = () => {
             <Button variant="contained" color="primary" onClick={handleClear}>
               Clear
             </Button>
-            &nbsp;
-            {/* <Button
-              variant="contained"
-              color="primary"
-              onClick={() => handleSaveAs(value, filename)}
-            >
-              Save
-            </Button> */}
+            {/* &nbsp;
             <TextField
               id="standard-basic"
               label="File Name"
               value={dname}
               onChange={handleDname}
-            />
+            /> */}
             &nbsp;
             <div id="tscrpt-save">
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => handleSave(filename, dname, value)}
+                onClick={() => handleSave(filename, value, user)}
               >
-                Save
+                Submit
               </Button>
               <Button
                 variant="contained"

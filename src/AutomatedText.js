@@ -7,6 +7,7 @@ import axios from "axios";
 const AutomatedText = ({ isStart, filename, setIsLoading, setNotes }) => {
   const [transcript, setTranscript] = useState("");
   const [rawText, setRawText] = useState([]);
+  const [textrate, setTextrate] = useState(500);
 
   useEffect(() => {
     const fetchData = async (file_name) => {
@@ -32,7 +33,7 @@ const AutomatedText = ({ isStart, filename, setIsLoading, setNotes }) => {
       rawText.forEach((word, i) => {
         setTimeout(() => {
           setTranscript((prev) => `${prev} ${word}`);
-        }, i * 500);
+        }, i * textrate);
       });
     }
   }, [filename, isStart]);
@@ -53,15 +54,6 @@ const AutomatedText = ({ isStart, filename, setIsLoading, setNotes }) => {
   const handleCopyToNotes = () => {
     setNotes(transcript);
   };
-
-  // const handleDname = (event) => {
-  //   setDname(event.target.value);
-  // };
-
-  // const handleSave = (fname, dname, transcript) => {
-  //   addTranscript(fname, dname, transcript, "transcript");
-  //   setDname("");
-  // };
 
   return (
     <form id="auto-text" noValidate autoComplete="off">
