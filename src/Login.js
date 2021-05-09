@@ -15,7 +15,7 @@ const Login = ({
   return (
     <section className="login">
       <div className="loginContainer">
-        <label>Username</label>
+        <label>Email</label>
         <input
           type="text"
           autoFocus
@@ -49,7 +49,7 @@ const Login = ({
                 Sign up
               </button>
               <p>
-                Don't have an account?
+                Already have an account?
                 <span onClick={() => setHasAccount(!hasAccount)}>Sign in</span>
               </p>
             </>

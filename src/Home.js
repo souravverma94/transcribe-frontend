@@ -19,7 +19,6 @@ const Home = ({ user }) => {
   const [filename, setFilename] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isStart, setIsStart] = useState(false);
-  // const [dname, setDname] = useState("");
   const [currentTime, setCurrentTime] = useState(0);
   const playerRef = useRef();
 
@@ -43,13 +42,8 @@ const Home = ({ user }) => {
     setIsStart((prevState) => !prevState);
   };
 
-  // const handleDname = (event) => {
-  //   setDname(event.target.value);
-  // };
-
   const handleSave = (fname, notes, user) => {
     addTranscript(fname, notes, user);
-    // setDname("");
   };
 
   const handleSeek = (Ref, val) => {
@@ -160,30 +154,22 @@ const Home = ({ user }) => {
             <Button variant="contained" color="primary" onClick={handleClear}>
               Clear
             </Button>
-            {/* &nbsp;
-            <TextField
-              id="standard-basic"
-              label="File Name"
-              value={dname}
-              onChange={handleDname}
-            /> */}
             &nbsp;
-            <div id="tscrpt-save">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleSave(filename, value, user)}
-              >
-                Submit
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => handleSaveAs(value, filename)}
-              >
-                Save As
-              </Button>
-            </div>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleSave(filename, value, user)}
+            >
+              Submit
+            </Button>
+            &nbsp;
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleSaveAs(value, filename)}
+            >
+              Save As
+            </Button>
           </form>
         </Grid>
       </Grid>

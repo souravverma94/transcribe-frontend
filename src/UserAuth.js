@@ -6,7 +6,7 @@ import Home from "./Home";
 import "./UserAuth.css";
 
 const UserAuth = () => {
-  const [user, setUser] = useState("sv");
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailerror, setEmailerror] = useState("");

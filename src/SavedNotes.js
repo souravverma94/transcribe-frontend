@@ -70,7 +70,7 @@ const SavedNotes = ({ filename }) => {
                     <ExpandLessIcon color="primary" />
                   </IconButton>
                 </ListItemIcon>
-                <ListItemSecondaryAction>
+                {/* <ListItemSecondaryAction>
                   <IconButton
                     edge="end"
                     aria-label="delete"
@@ -79,7 +79,7 @@ const SavedNotes = ({ filename }) => {
                   >
                     <DeleteIcon color="primary" />
                   </IconButton>
-                </ListItemSecondaryAction>
+                </ListItemSecondaryAction> */}
               </ListItem>
             );
           })}
